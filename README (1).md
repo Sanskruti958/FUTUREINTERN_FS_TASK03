@@ -11,8 +11,6 @@
 🔗 **[View Live Site](https://Sanskruti950.github.io/peachy-bites/)**  
 📁 **[GitHub Repository](https://github.com/Sanskruti950/peachy-bites)**
 
-> _Replace the links above with your actual GitHub Pages URL and repo link after deployment._
-
 ---
 
 ## 📌 Project Overview
@@ -103,9 +101,7 @@ peachy-bites/
         └── (local images if replacing Unsplash URLs)
 ```
 
-> **Note:** The current build is a single `index.html` file — all CSS is in `<style>` tags and JS is in a `<script>` tag at the bottom. No build tools, no npm, no frameworks required.
 
----
 
 ## 🎨 Design System
 
