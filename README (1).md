@@ -8,8 +8,8 @@
 
 ## 🌐 Live Demo
 
-🔗 **[View Live Site](https://yourusername.github.io/peachy-bites/)**  
-📁 **[GitHub Repository](https://github.com/yourusername/peachy-bites)**
+🔗 **[View Live Site](https://Sanskruti950.github.io/peachy-bites/)**  
+📁 **[GitHub Repository](https://github.com/Sanskruti950/peachy-bites)**
 
 > _Replace the links above with your actual GitHub Pages URL and repo link after deployment._
 
