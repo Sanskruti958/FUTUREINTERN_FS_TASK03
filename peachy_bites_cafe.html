@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peachy Bites Café — Waffles, Bubble Tea & More</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FFF8F0;
+    --peach-light: #FFE8D6;
+    --peach: #FFBA8C;
+    --orange: #F97316;
+    --orange-dark: #C2410C;
+    --brown: #7C3E12;
+    --bubble-tea: #D4A5A5;
+    --waffle-gold: #E8A038;
+    --waffle-dark: #B5722A;
+    --text-dark: #2D1A0E;
+    --text-mid: #6B4226;
+    --text-light: #A07050;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+    background: rgba(255,248,240,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(249,115,22,0.15);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 900;
+    color: var(--orange-dark);
+    letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--waffle-gold); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; font-size: 0.9rem; font-weight: 500;
+    color: var(--text-mid); transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--orange); color: white;
+    padding: 0.5rem 1.4rem; border-radius: 50px;
+    text-decoration: none; font-size: 0.9rem; font-weight: 600;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 4px 15px rgba(249,115,22,0.35);
+  }
+  .nav-cta:hover { background: var(--orange-dark); transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(232,160,56,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(212,165,165,0.25) 0%, transparent 60%),
+      var(--cream);
+    display: flex; align-items: center;
+    padding: 100px 5% 60px;
+    position: relative; overflow: hidden;
+  }
+
+  /* Waffle grid background pattern */
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(232,160,56,0.08) 39px, rgba(232,160,56,0.08) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(232,160,56,0.08) 39px, rgba(232,160,56,0.08) 40px);
+    pointer-events: none;
+  }
+
+  .hero-content { max-width: 55%; z-index: 2; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--peach-light); color: var(--orange-dark);
+    padding: 0.4rem 1rem; border-radius: 50px;
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em;
+    text-transform: uppercase; margin-bottom: 1.5rem;
+    border: 1px solid rgba(249,115,22,0.25);
+  }
+  .hero-badge::before { content: '🍑'; font-size: 0.9rem; }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900; line-height: 1.05;
+    color: var(--text-dark);
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--orange);
+    display: block;
+  }
+  .hero p {
+    font-size: 1.1rem; line-height: 1.7;
+    color: var(--text-mid); max-width: 480px;
+    margin-bottom: 2rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--orange); color: white;
+    padding: 0.85rem 2rem; border-radius: 50px;
+    text-decoration: none; font-weight: 600; font-size: 1rem;
+    box-shadow: 0 8px 25px rgba(249,115,22,0.4);
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(249,115,22,0.5); }
+  .btn-secondary {
+    border: 2px solid var(--orange); color: var(--orange);
+    padding: 0.85rem 2rem; border-radius: 50px;
+    text-decoration: none; font-weight: 600; font-size: 1rem;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: var(--peach-light); }
+
+  /* Hero floating food cards */
+  .hero-visual {
+    position: absolute; right: 4%; top: 50%;
+    transform: translateY(-50%);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px; z-index: 2;
+  }
+  .food-card {
+    background: white; border-radius: 20px;
+    overflow: hidden; width: 185px;
+    box-shadow: 0 10px 40px rgba(124,62,18,0.12);
+    transition: transform 0.3s;
+  }
+  .food-card:hover { transform: translateY(-6px); }
+  .food-card:nth-child(2) { margin-top: 40px; }
+  .food-card:nth-child(4) { margin-top: -30px; }
+  .food-card img {
+    width: 100%; height: 130px; object-fit: cover;
+  }
+  .food-card-info { padding: 10px 14px 14px; }
+  .food-card-info h4 {
+    font-size: 0.88rem; font-weight: 600; color: var(--text-dark);
+  }
+  .food-card-info p { font-size: 0.78rem; color: var(--text-light); }
+  .food-card-price {
+    font-weight: 700; color: var(--orange);
+    font-size: 0.95rem; margin-top: 4px;
+  }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 2.5rem;
+  }
+  .stat-item { text-align: left; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900; color: var(--orange-dark);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--text-light); font-weight: 500; margin-top: 2px; }
+
+  /* ─── SECTION SHARED ─── */
+  section { padding: 90px 5%; }
+
+  .section-tag {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--orange);
+    margin-bottom: 0.7rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900; color: var(--text-dark);
+    line-height: 1.1; margin-bottom: 1rem;
+  }
+  .section-sub { font-size: 1rem; color: var(--text-mid); max-width: 540px; line-height: 1.7; }
+
+  /* ─── ABOUT / STORY ─── */
+  .about {
+    background: white;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .about-img-wrap {
+    position: relative;
+  }
+  .about-img-wrap img {
+    width: 100%; border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(124,62,18,0.15);
+  }
+  .about-badge-float {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--orange); color: white;
+    border-radius: 18px; padding: 18px 22px;
+    box-shadow: 0 8px 30px rgba(249,115,22,0.4);
+    text-align: center;
+  }
+  .about-badge-float .big { font-size: 2rem; font-weight: 900; line-height: 1; font-family: 'Playfair Display', serif; }
+  .about-badge-float .small { font-size: 0.72rem; font-weight: 600; margin-top: 2px; }
+
+  .about-features { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2rem; }
+  .about-feat {
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .feat-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--peach-light); display: flex;
+    align-items: center; justify-content: center;
+    font-size: 1.3rem; flex-shrink: 0;
+  }
+  .feat-text h4 { font-size: 0.95rem; font-weight: 600; color: var(--text-dark); }
+  .feat-text p { font-size: 0.85rem; color: var(--text-light); line-height: 1.5; }
+
+  /* ─── MENU ─── */
+  .menu { background: var(--cream); }
+  .menu-header { text-align: center; margin-bottom: 3rem; }
+  .menu-tabs {
+    display: flex; gap: 0.75rem; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 3rem;
+  }
+  .menu-tab {
+    padding: 0.6rem 1.5rem; border-radius: 50px;
+    border: 1.5px solid rgba(249,115,22,0.25);
+    background: white; color: var(--text-mid);
+    cursor: pointer; font-weight: 500; font-size: 0.9rem;
+    transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+  }
+  .menu-tab.active, .menu-tab:hover {
+    background: var(--orange); color: white;
+    border-color: var(--orange);
+    box-shadow: 0 4px 15px rgba(249,115,22,0.35);
+  }
+
+  .menu-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .menu-item {
+    background: white; border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(124,62,18,0.07);
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+  }
+  .menu-item:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(124,62,18,0.15); }
+  .menu-item img { width: 100%; height: 200px; object-fit: cover; }
+  .menu-item-body { padding: 1.1rem 1.3rem; }
+  .menu-item-body h3 { font-size: 1rem; font-weight: 600; color: var(--text-dark); margin-bottom: 4px; }
+  .menu-item-body p { font-size: 0.82rem; color: var(--text-light); line-height: 1.5; margin-bottom: 10px; }
+  .menu-item-footer {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .price { font-size: 1.1rem; font-weight: 700; color: var(--orange-dark); }
+  .add-btn {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--orange); border: none;
+    color: white; font-size: 1.2rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 4px 12px rgba(249,115,22,0.35);
+  }
+  .add-btn:hover { background: var(--orange-dark); transform: scale(1.1); }
+  .tag-badge {
+    display: inline-block; padding: 2px 8px; border-radius: 50px;
+    font-size: 0.7rem; font-weight: 600; margin-bottom: 6px;
+  }
+  .tag-new { background: #FFF3CD; color: #92600A; }
+  .tag-popular { background: #FFE8D6; color: var(--orange-dark); }
+  .tag-veg { background: #D4EDDA; color: #155724; }
+
+  /* ─── BUBBLE TEA SPECIAL SECTION ─── */
+  .bubble-section {
+    background: linear-gradient(135deg, #3D1C02 0%, #6B3410 40%, #7C3E12 100%);
+    position: relative; overflow: hidden;
+  }
+  .bubble-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 80% at 80% 50%, rgba(212,165,165,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .bubble-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .bubble-text .section-tag { color: var(--peach); }
+  .bubble-text .section-title { color: var(--peach-light); }
+  .bubble-text .section-sub { color: rgba(255,232,214,0.75); }
+  .bubble-flavors {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 2rem;
+  }
+  .flavor-chip {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px; padding: 12px 14px;
+    color: var(--peach-light); font-size: 0.88rem; font-weight: 500;
+  }
+  .flavor-dot {
+    width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+  }
+  .bubble-img-wrap {
+    display: flex; gap: 16px; align-items: flex-end;
+  }
+  .bubble-img-wrap img {
+    border-radius: 24px; object-fit: cover;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .bubble-img-wrap img:first-child { width: 55%; height: 380px; }
+  .bubble-img-wrap img:last-child { width: 42%; height: 300px; }
+
+  /* ─── GALLERY ─── */
+  .gallery { background: white; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 220px);
+    gap: 16px; margin-top: 3rem;
+  }
+  .gallery-item { border-radius: 16px; overflow: hidden; position: relative; }
+  .gallery-item.big { grid-column: span 2; grid-row: span 2; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .gallery-item:hover img { transform: scale(1.06); }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(45,26,14,0.7) 0%, transparent 50%);
+    opacity: 0; transition: opacity 0.3s;
+    display: flex; align-items: flex-end; padding: 16px;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-overlay span { color: white; font-weight: 600; font-size: 0.9rem; }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials { background: var(--cream); }
+  .test-header { text-align: center; margin-bottom: 3rem; }
+  .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .test-card {
+    background: white; border-radius: 20px; padding: 1.8rem;
+    box-shadow: 0 4px 20px rgba(124,62,18,0.07);
+    border: 1px solid rgba(232,160,56,0.15);
+  }
+  .test-stars { color: var(--waffle-gold); font-size: 1rem; margin-bottom: 1rem; }
+  .test-text { font-size: 0.9rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 1.2rem; font-style: italic; }
+  .test-author { display: flex; align-items: center; gap: 12px; }
+  .test-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--peach-light); display: flex;
+    align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.9rem; color: var(--orange-dark);
+  }
+  .test-author-info h5 { font-size: 0.88rem; font-weight: 600; color: var(--text-dark); }
+  .test-author-info p { font-size: 0.78rem; color: var(--text-light); }
+
+  /* ─── HOURS & LOCATION ─── */
+  .location-section {
+    background: white;
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start;
+  }
+  .hours-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+  .hours-table tr { border-bottom: 1px solid rgba(232,160,56,0.15); }
+  .hours-table td { padding: 10px 0; font-size: 0.9rem; }
+  .hours-table td:first-child { color: var(--text-mid); font-weight: 500; }
+  .hours-table td:last-child { color: var(--text-dark); font-weight: 600; text-align: right; }
+  .hours-table tr.today td { color: var(--orange-dark); }
+  .map-placeholder {
+    background: var(--peach-light);
+    border-radius: 20px; height: 320px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    border: 2px dashed rgba(249,115,22,0.3);
+    gap: 1rem; margin-top: 1.5rem;
+  }
+  .map-placeholder .map-icon { font-size: 3rem; }
+  .map-placeholder h4 { color: var(--orange-dark); font-size: 1rem; font-weight: 600; }
+  .map-placeholder p { font-size: 0.85rem; color: var(--text-light); text-align: center; max-width: 220px; }
+  .contact-chips { display: flex; flex-direction: column; gap: 10px; margin-top: 1.5rem; }
+  .contact-chip {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--peach-light); padding: 12px 16px;
+    border-radius: 12px; font-size: 0.88rem; color: var(--text-dark);
+  }
+  .contact-chip-icon { font-size: 1.1rem; }
+
+  /* ─── CTA BANNER ─── */
+  .cta-banner {
+    background: var(--orange);
+    text-align: center; padding: 80px 5%;
+    position: relative; overflow: hidden;
+  }
+  .cta-banner::before {
+    content: '🧇 🍑 🧋 🍓 🥤 🍊';
+    position: absolute; top: 15px; left: 0; width: 100%;
+    font-size: 2.5rem; opacity: 0.12; letter-spacing: 3rem;
+    white-space: nowrap; pointer-events: none;
+  }
+  .cta-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: white; font-weight: 900; margin-bottom: 1rem;
+  }
+  .cta-banner p { color: rgba(255,255,255,0.85); font-size: 1.05rem; margin-bottom: 2rem; }
+  .cta-white {
+    background: white; color: var(--orange-dark);
+    padding: 0.9rem 2.5rem; border-radius: 50px;
+    text-decoration: none; font-weight: 700; font-size: 1.05rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    display: inline-block; transition: all 0.2s;
+  }
+  .cta-white:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(0,0,0,0.2); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--text-dark); color: rgba(255,248,240,0.7);
+    padding: 60px 5% 30px;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px; margin-bottom: 3rem;
+  }
+  .footer-brand .nav-logo { font-size: 1.6rem; color: var(--peach); margin-bottom: 0.8rem; }
+  .footer-brand .nav-logo span { color: var(--waffle-gold); }
+  .footer-brand p { font-size: 0.85rem; line-height: 1.7; color: rgba(255,248,240,0.6); max-width: 240px; }
+  .footer-col h5 { color: var(--peach-light); font-size: 0.88rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .footer-col ul a { color: rgba(255,248,240,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--peach); }
+  .social-row { display: flex; gap: 10px; margin-top: 0.8rem; }
+  .social-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,248,240,0.08);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 0.9rem; color: rgba(255,248,240,0.7);
+    transition: background 0.2s, color 0.2s;
+  }
+  .social-btn:hover { background: var(--orange); color: white; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.8rem; color: rgba(255,248,240,0.4);
+  }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .hero-content { max-width: 100%; }
+    .hero-visual { display: none; }
+    .about, .bubble-inner, .location-section { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .test-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .gallery-item.big { grid-column: span 2; height: 260px; }
+    nav { padding: 0 4%; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 600px) {
+    .bubble-img-wrap img:last-child { display: none; }
+    .bubble-img-wrap img:first-child { width: 100%; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item.big { grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Peachy<span>Bites</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#bubble">Bubble Tea</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#location">Visit Us</a></li>
+  </ul>
+  <a href="#menu" class="nav-cta">Order Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Fresh · Handcrafted · Delightful</div>
+    <h1>
+      Where Every Bite is a
+      <em>Peachy Dream</em>
+    </h1>
+    <p>Hand-crafted waffles, fresh fruit bowls, indulgent bubble teas, and seasonal specials — made with love in the heart of the city.</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-primary">🧇 Explore Menu</a>
+      <a href="#location" class="btn-secondary">Find Us</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Menu Items</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4.9★</div>
+        <div class="stat-label">Customer Rating</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3 yrs</div>
+        <div class="stat-label">Serving Joy</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating food cards -->
+  <div class="hero-visual">
+    <div class="food-card">
+      <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=260&fit=crop" alt="Fresh fruit bowl">
+      <div class="food-card-info">
+        <div class="tag-badge tag-popular">Popular</div>
+        <h4>Tropical Fruit Bowl</h4>
+        <div class="food-card-price">₹249</div>
+      </div>
+    </div>
+    <div class="food-card">
+      <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=260&fit=crop" alt="Waffles">
+      <div class="food-card-info">
+        <div class="tag-badge tag-new">New</div>
+        <h4>Golden Waffle Stack</h4>
+        <div class="food-card-price">₹329</div>
+      </div>
+    </div>
+    <div class="food-card">
+      <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=400&h=260&fit=crop" alt="Bubble tea">
+      <div class="food-card-info">
+        <div class="tag-badge tag-veg">Veg</div>
+        <h4>Peach Bubble Tea</h4>
+        <div class="food-card-price">₹199</div>
+      </div>
+    </div>
+    <div class="food-card">
+      <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=260&fit=crop" alt="Pancakes">
+      <div class="food-card-info">
+        <div class="tag-badge tag-popular">Popular</div>
+        <h4>Berry Pancake Tower</h4>
+        <div class="food-card-price">₹299</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-img-wrap reveal">
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&h=500&fit=crop" alt="Café interior">
+    <div class="about-badge-float">
+      <div class="big">100%</div>
+      <div class="small">FRESH DAILY</div>
+    </div>
+  </div>
+  <div class="about-text reveal reveal-delay-1">
+    <div class="section-tag">Our Story</div>
+    <h2 class="section-title">A Café Born from Love of Good Food</h2>
+    <p class="section-sub">PeachyBites was founded with one simple belief: great food should make you feel good — from the first bite to the last sip. We source our fruits fresh every morning and craft each waffle with golden perfection.</p>
+    <div class="about-features">
+      <div class="about-feat">
+        <div class="feat-icon">🍑</div>
+        <div class="feat-text">
+          <h4>Farm-Fresh Ingredients</h4>
+          <p>Seasonal fruits sourced locally. No preservatives, no shortcuts.</p>
+        </div>
+      </div>
+      <div class="about-feat">
+        <div class="feat-icon">🧇</div>
+        <div class="feat-text">
+          <h4>Hand-Crafted Waffles</h4>
+          <p>Made to order with Belgian batter for that perfect crisp-soft balance.</p>
+        </div>
+      </div>
+      <div class="about-feat">
+        <div class="feat-icon">🧋</div>
+        <div class="feat-text">
+          <h4>Authentic Bubble Tea</h4>
+          <p>Real tapioca pearls, brewed tea, and dreamy syrups — 20+ flavours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="menu-header">
+    <div class="section-tag">What We Serve</div>
+    <h2 class="section-title">Our Signature Menu</h2>
+    <p class="section-sub" style="margin: 0 auto;">From golden waffles to vibrant fruit bowls — something delicious for every mood.</p>
+  </div>
+
+  <div class="menu-tabs">
+    <button class="menu-tab active" onclick="filterMenu('all', this)">All Items</button>
+    <button class="menu-tab" onclick="filterMenu('waffle', this)">🧇 Waffles</button>
+    <button class="menu-tab" onclick="filterMenu('fruit', this)">🍓 Fruit Bowls</button>
+    <button class="menu-tab" onclick="filterMenu('bubble', this)">🧋 Bubble Tea</button>
+    <button class="menu-tab" onclick="filterMenu('pancake', this)">🥞 Pancakes</button>
+  </div>
+
+  <div class="menu-grid" id="menu-grid">
+
+    <div class="menu-item reveal" data-cat="waffle">
+      <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=500&h=300&fit=crop" alt="Classic Butter Waffle">
+      <div class="menu-item-body">
+        <div class="tag-badge tag-popular">⭐ Popular</div>
+        <h3>Classic Butter Waffle</h3>
+        <p>Crispy Belgian waffle with salted butter, maple syrup & powdered sugar</p>
+        <div class="menu-item-footer">
+          <span class="price">₹299</span>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item reveal reveal-delay-1" data-cat="waffle">
+      <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?w=500&h=300&fit=crop" alt="Strawberry Cream Waffle">
+      <div class="menu-item-body">
+        <div class="tag-badge tag-new">✨ New</div>
+        <h3>Strawberry Cream Waffle</h3>
+        <p>Fresh strawberries, whipped cream, strawberry coulis on a golden waffle</p>
+        <div class="menu-item-footer">
+          <span class="price">₹349</span>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item reveal reveal-delay-2" data-cat="fruit">
+      <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=500&h=300&fit=crop" alt="Tropical Fruit Bowl">
+      <div class="menu-item-body">
+        <div class="tag-badge tag-veg">🌱 Pure Veg</div>
+        <h3>Tropical Fruit Bowl</h3>
+        <p>Mango, pineapple, dragon fruit, kiwi with honey drizzle & chia seeds</p>
+        <div class="menu-item-footer">
+          <span class="price">₹249</span>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item reveal" data-cat="bubble">
+      <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=500&h=300&fit=crop" alt="Peach Bubble Tea">
+      <div class="menu-item-body">
+        <div class="tag-badge tag-popular">⭐ Best Seller</div>
+        <h3>Peach Oolong Bubble Tea</h3>
+        <p>Premium oolong tea with peach syrup, fresh tapioca pearls & cream top</p>
+        <div class="menu-item-footer">
+          <span class="price">₹199</span>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item reveal reveal-delay-1" data-cat="pancake">
+      <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=500&h=300&fit=crop" alt="Berry Pancake Tower">
+      <div class="menu-item-body">
+        <div class="tag-badge tag-popular">⭐ Popular</div>
+        <h3>Berry Pancake Tower</h3>
+        <p>Stack of 4 fluffy pancakes with mixed berries, mascarpone & berry jam</p>
+        <div class="menu-item-footer">
+          <span class="price">₹329</span>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item reveal reveal-delay-2" data-cat="fruit">
+      <img src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=500&h=300&fit=crop" alt="Açaí Bowl">
+      <div class="menu-item-body">
+        <div class="tag-badge tag-new">✨ New</div>
+        <h3>Açaí Sunrise Bowl</h3>
+        <p>Açaí base with granola, banana, mango & fresh orange segments</p>
+        <div class="menu-item-footer">
+          <span class="price">₹279</span>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Cart toast -->
+  <div id="cart-toast" style="
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--orange-dark); color: white;
+    padding: 12px 22px; border-radius: 50px;
+    font-size: 0.9rem; font-weight: 600;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    transform: translateY(80px); opacity: 0;
+    transition: all 0.3s; z-index: 200;
+  ">🛒 Item added!</div>
+</section>
+
+<!-- BUBBLE TEA SPECIAL -->
+<section class="bubble-section" id="bubble">
+  <div class="bubble-inner">
+    <div class="bubble-text reveal">
+      <div class="section-tag">Signature Drinks</div>
+      <h2 class="section-title">Bubble Tea Paradise</h2>
+      <p class="section-sub">Sip into a world of flavour. Our bubble teas are brewed fresh, loaded with chewy tapioca pearls, and available in 20+ dreamy flavours.</p>
+      <div class="bubble-flavors">
+        <div class="flavor-chip"><div class="flavor-dot" style="background:#FFBA8C"></div>Peach Oolong</div>
+        <div class="flavor-chip"><div class="flavor-dot" style="background:#D4A5A5"></div>Taro Milk Tea</div>
+        <div class="flavor-chip"><div class="flavor-dot" style="background:#7DB87D"></div>Matcha Latte</div>
+        <div class="flavor-chip"><div class="flavor-dot" style="background:#E8A038"></div>Brown Sugar</div>
+        <div class="flavor-chip"><div class="flavor-dot" style="background:#E8708A"></div>Strawberry</div>
+        <div class="flavor-chip"><div class="flavor-dot" style="background:#9B59B6"></div>Blueberry Burst</div>
+      </div>
+      <a href="#menu" class="btn-primary" style="display:inline-flex; margin-top:2rem;">🧋 See All Flavours</a>
+    </div>
+    <div class="bubble-img-wrap reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1578914029738-f9aa6a9acfa2?w=400&h=500&fit=crop" alt="Bubble tea drinks">
+      <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=300&h=380&fit=crop" alt="Bubble tea closeup">
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div style="text-align:center; margin-bottom:1rem;">
+    <div class="section-tag">Our World</div>
+    <h2 class="section-title">Every Visit, a Memory</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item big">
+      <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?w=700&h=500&fit=crop" alt="Waffle">
+      <div class="gallery-overlay"><span>🧇 Waffle Love</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=400&h=300&fit=crop" alt="French toast">
+      <div class="gallery-overlay"><span>🍯 French Toast</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=400&h=300&fit=crop" alt="Bubble tea">
+      <div class="gallery-overlay"><span>🧋 Bubble Tea</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=400&h=300&fit=crop" alt="Fruit bowl">
+      <div class="gallery-overlay"><span>🍓 Fresh Bowls</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=300&fit=crop" alt="Pancakes">
+      <div class="gallery-overlay"><span>🥞 Pancakes</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="test-header">
+    <div class="section-tag">Guest Love</div>
+    <h2 class="section-title">What Our Guests Say</h2>
+  </div>
+  <div class="test-grid">
+    <div class="test-card reveal">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"The peach bubble tea is an absolute dream. I've tried many places but PeachyBites has perfected the tapioca pearls — chewy, fresh, and never too sweet!"</p>
+      <div class="test-author">
+        <div class="test-avatar">PR</div>
+        <div class="test-author-info">
+          <h5>Priya Rao</h5>
+          <p>Loyal Customer since 2022</p>
+        </div>
+      </div>
+    </div>
+    <div class="test-card reveal reveal-delay-1">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"Brought my family here on Sunday morning and the Golden Waffle Stack was a unanimous hit. The café vibe is warm and the staff are so friendly!"</p>
+      <div class="test-author">
+        <div class="test-avatar">AM</div>
+        <div class="test-author-info">
+          <h5>Arjun Mehta</h5>
+          <p>Food Blogger, Pune</p>
+        </div>
+      </div>
+    </div>
+    <div class="test-card reveal reveal-delay-2">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"Their açaí bowl is the freshest I've had in the city. You can taste the quality — real fruit, no shortcuts. PeachyBites is now our weekly ritual!"</p>
+      <div class="test-author">
+        <div class="test-avatar">SK</div>
+        <div class="test-author-info">
+          <h5>Sneha Kulkarni</h5>
+          <p>Health & Wellness Coach</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION & HOURS -->
+<section class="location-section" id="location">
+  <div class="reveal">
+    <div class="section-tag">Come Visit</div>
+    <h2 class="section-title">Hours & Location</h2>
+    <p class="section-sub">We'd love to see you! Walk in or call ahead for large groups.</p>
+    <table class="hours-table">
+      <tr class="today"><td>Monday – Friday</td><td>8:00 AM – 10:00 PM</td></tr>
+      <tr><td>Saturday</td><td>8:00 AM – 11:00 PM</td></tr>
+      <tr><td>Sunday</td><td>9:00 AM – 10:00 PM</td></tr>
+    </table>
+    <div class="contact-chips" style="margin-top:1.5rem">
+      <div class="contact-chip"><span class="contact-chip-icon">📍</span> 42 Garden Lane, Baner, Pune – 411045</div>
+      <div class="contact-chip"><span class="contact-chip-icon">📞</span> +91 98765 43210</div>
+      <div class="contact-chip"><span class="contact-chip-icon">📧</span> hello@peachybites.in</div>
+      <div class="contact-chip"><span class="contact-chip-icon">📸</span> @peachybites.cafe</div>
+    </div>
+  </div>
+  <div class="reveal reveal-delay-1">
+    <div class="map-placeholder">
+      <div class="map-icon">🗺️</div>
+      <h4>Find Us on Google Maps</h4>
+      <p>42 Garden Lane, Baner, Pune. Look for the peach-coloured awning!</p>
+      <a href="https://maps.google.com" target="_blank" class="btn-primary" style="margin-top:0.5rem; font-size:0.88rem; padding:0.65rem 1.4rem;">Open in Maps →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <h2>Your Peachy Treat is Waiting 🍑</h2>
+  <p>Come in, sit down, and let us make your day sweeter — one bite at a time.</p>
+  <a href="tel:+919876543210" class="cta-white">📞 Reserve a Table</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo">Peachy<span>Bites</span></div>
+      <p>Where every bite is handcrafted with fresh ingredients and served with genuine warmth. Your favourite café since 2022.</p>
+      <div class="social-row" style="margin-top:1rem">
+        <a href="#" class="social-btn">📸</a>
+        <a href="#" class="social-btn">👍</a>
+        <a href="#" class="social-btn">🐦</a>
+        <a href="#" class="social-btn">▶️</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Menu</h5>
+      <ul>
+        <li><a href="#">Waffles</a></li>
+        <li><a href="#">Bubble Tea</a></li>
+        <li><a href="#">Fruit Bowls</a></li>
+        <li><a href="#">Pancakes</a></li>
+        <li><a href="#">Seasonal Specials</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Visit</h5>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">Catering</a></li>
+        <li><a href="#">Gift Cards</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Newsletter</h5>
+      <p style="font-size:0.82rem; color:rgba(255,248,240,0.55); margin-bottom:0.8rem;">Get weekly specials & new flavour drops straight to your inbox.</p>
+      <div style="display:flex; gap:8px;">
+        <input type="email" placeholder="your@email.com" style="flex:1; padding:0.6rem 0.9rem; border-radius:8px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.08); color:white; font-size:0.85rem; outline:none;">
+        <button style="background:var(--orange); color:white; border:none; border-radius:8px; padding:0.6rem 1rem; cursor:pointer; font-weight:600; font-size:0.85rem;">Join</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 PeachyBites Café. All rights reserved.</span>
+    <span>Made with 🍑 in Pune, India</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Menu filter
+  function filterMenu(cat, btn) {
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.menu-item').forEach(item => {
+      if (cat === 'all' || item.dataset.cat === cat) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  // Add to cart toast
+  function addToCart(btn) {
+    btn.textContent = '✓';
+    btn.style.background = '#2D8A4E';
+    const toast = document.getElementById('cart-toast');
+    toast.style.transform = 'translateY(0)';
+    toast.style.opacity = '1';
+    setTimeout(() => {
+      toast.style.transform = 'translateY(80px)';
+      toast.style.opacity = '0';
+      setTimeout(() => { btn.textContent = '+'; btn.style.background = ''; }, 500);
+    }, 2000);
+  }
+
+  // Smooth nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 100) current = sec.getAttribute('id');
+    });
+    navLinks.forEach(l => {
+      l.style.color = l.getAttribute('href') === '#' + current ? 'var(--orange)' : '';
+    });
+  });
+</script>
+
+</body>
+</html>
