@@ -6,10 +6,6 @@
 
 ---
 
-## 🌐 Live Demo
-
-🔗 **[View Live Site](https://Sanskruti950.github.io/peachy-bites/)**  
-📁 **[GitHub Repository](https://github.com/Sanskruti950/peachy-bites)**
 
 ---
 
