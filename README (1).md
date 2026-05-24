@@ -355,9 +355,9 @@ Feel free to fork, adapt, and use for your own café, restaurant, or food busine
 
 ## 👤 Author
 
-**Built by:** Your Name  
+**Built by:** Sanskruti Anil Pawar  
 **Course / Project:** Real-World Web Development — Business Website Pitch  
-**College:** Your College Name  
+  
 **Year:** 2025  
 
 > _"The best way to learn web development is to build something real, for someone real."_
